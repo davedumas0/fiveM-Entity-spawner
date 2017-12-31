@@ -1,4 +1,6 @@
 
+local showInfo = true
+
 
 ---------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------put entity name or hash here---------------------------------------------------------
@@ -6,6 +8,7 @@
 function things(modelHash)
    stuff = modelHash
 end
+things(1098542403)
 ----------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------this sets delete gun toggle to off --------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -14,75 +17,12 @@ end
 --------------------------------------------this gets info about spawned entity and player----------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
 
-Citizen.CreateThread(function()
-	while true do
-	  Citizen.Wait(0)
-  local playerCoords = GetEntityCoords(GetPlayerPed(PlayerId()), true)	  
-  local position = "player Coords X "..playerCoordsX
-  local offset = {x = 0.290, y = 0.850}
-  local rgb = {r = 255, g = 0, b = 0}
-  local alpha = 255
-  local scale = 0.6
-  local font = 0
-            SetTextColour(rgb.r, rgb.g, rgb.b, alpha)
-            SetTextFont(font)
-		    SetTextScale(scale, scale)
-			SetTextWrap(0.0, 1.0)
-			SetTextCentre(false)
-			SetTextDropshadow(2, 2, 0, 0, 0)
-			SetTextEdge(1, 0, 0, 0, 205)
-			SetTextEntry("STRING")
-			AddTextComponentString(position)			
-			DrawText(offset.x, offset.y)       	  
-	end		
-end)
 
-Citizen.CreateThread(function()
-	while true do
-	  Citizen.Wait(0)
-  local playerCoords = GetEntityCoords(GetPlayerPed(PlayerId()), true)	  
-  local position = "player Coords Y "..playerCoordsY
-  local offset = {x = 0.290, y = 0.875}
-  local rgb = {r = 255, g = 0, b = 0}
-  local alpha = 255
-  local scale = 0.6
-  local font = 0
-            SetTextColour(rgb.r, rgb.g, rgb.b, alpha)
-            SetTextFont(font)
-		    SetTextScale(scale, scale)
-			SetTextWrap(0.0, 1.0)
-			SetTextCentre(false)
-			SetTextDropshadow(2, 2, 0, 0, 0)
-			SetTextEdge(1, 0, 0, 0, 205)
-			SetTextEntry("STRING")
-			AddTextComponentString(position)			
-			DrawText(offset.x, offset.y)       	  
-	end		
-end)
-Citizen.CreateThread(function()
-	while true do
-	  Citizen.Wait(0)
-  local playerCoords = GetEntityCoords(GetPlayerPed(PlayerId()), true)	  
-  local position = "player Coords Z "..playerCoordsZ
-  local offset = {x = 0.290, y = 0.900}
-  local rgb = {r = 255, g = 0, b = 0}
-  local alpha = 255
-  local scale = 0.6
-  local font = 0
-            SetTextColour(rgb.r, rgb.g, rgb.b, alpha)
-            SetTextFont(font)
-		    SetTextScale(scale, scale)
-			SetTextWrap(0.0, 1.0)
-			SetTextCentre(false)
-			SetTextDropshadow(2, 2, 0, 0, 0)
-			SetTextEdge(1, 0, 0, 0, 205)
-			SetTextEntry("STRING")
-			AddTextComponentString(position)			
-			DrawText(offset.x, offset.y)       	  
-	end		
-end)
 Citizen.CreateThread(function()	
   while true do
+    if IsControlPressed(0, 21) and IsControlJustPressed(1, 168) then
+     showInfo = not showInfo
+   end  
      Citizen.Wait(0) 
 	 playerPed = GetPlayerPed(PlayerId())
      playerCoords = GetEntityCoords(GetPlayerPed(PlayerId()), true)
@@ -99,7 +39,47 @@ Citizen.CreateThread(function()
      ForceRoomForEntity(a, playerInteriorID, PlayerRoomKey)
 	 EntityInterior = GetInteriorFromEntity(a)
 	 EntityRoomKey = GetRoomKeyFromEntity(a)
-	 
+	if showInfo then
+	  --SetNetworkIdExistsOnAllMachines(dude10, true)
+	  --NetworkRegisterEntityAsNetworked(dude10)
+	  --NetworkSetEntityVisibleToNetwork(dude10, true)
+	  requestControl = NetworkRequestControlOfEntity(dude10)
+	local entityCoords = GetEntityCoords(dude10)
+	local entityRot = GetEntityRotation(dude10, 2)
+
+	local isEntityNetworked = NetworkHasControlOfEntity(dude10)
+	 entityNetworkID = NetworkGetNetworkIdFromEntity(dude10)
+     doesEntityExist = NetworkDoesNetworkIdExist(NetworkGetNetworkIdFromEntity(dude10))
+      SetEntityAsMissionEntity(dude10, 1, 0)
+     DrawSprite("shared","bggradient", 0.88, 0.31, 0.25, 0.50, 90.0, 0, 0, 0, 200)
+     drawTxt('DEBUG INFO ', 6, 1, 0.88, 0.097 , 0.5, 255, 0, 0, 255)
+     drawTxt('entity ID: ', 6, 1, 0.80, 0.125 , 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(dude10), 6, 1, 0.91, 0.125 , 0.6, 0, 255, 255, 255)
+     drawTxt('entity model hash: ', 6, 1, 0.80, 0.150 , 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(GetEntityModel(dude10)), 6, 1, 0.91, 0.150 , 0.6, 0, 255, 255, 255)
+     drawTxt('entity interior: ', 6, 1, 0.80, 0.180, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(GetInteriorFromEntity(dude10)) , 6, 1, 0.91, 0.180, 0.6, 0, 255, 255, 255)
+     drawTxt('entity X coords: ', 6, 1, 0.80, 0.210, 0.6 , 0, 255, 0, 255)
+     drawTxt(tostring(entityCoords.x) , 6, 1, 0.91, 0.210, 0.6, 0, 255, 0, 255)
+     drawTxt("entity Y coords: ", 6, 1, 0.80, 0.240, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityCoords.y) , 6, 1, 0.91, 0.240, 0.6, 0, 255, 0, 255)
+     drawTxt("entity Z coords: ", 6, 1, 0.80, 0.270, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityCoords.z) , 6, 1, 0.91, 0.270, 0.6, 0, 255, 0, 255)
+     drawTxt('entity X rotation: ', 6, 1, 0.80, 0.300, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityRot.x) , 6, 1, 0.91, 0.30, 0.6, 0, 255, 0, 255)
+     drawTxt('entity Y rotation: ', 6, 1, 0.80, 0.330, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityRot.y) , 6, 1, 0.91, 0.330, 0.6, 0, 255, 0, 255)
+     drawTxt('entity Z rotation: ', 6, 1, 0.80, 0.360, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityRot.z) , 6, 1, 0.91, 0.360, 0.6, 0, 255, 0, 255)
+     drawTxt('networkID: ', 6, 1, 0.83, 0.390, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(NetworkGetNetworkIdFromEntity(dude10)) , 6, 1, 0.94, 0.390, 0.6, 0, 255, 0, 255)
+     drawTxt('is entity networked: ', 6, 1, 0.84, 0.420, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(isEntityNetworked) , 6, 1, 0.94, 0.420, 0.6, 0, 255, 0, 255)
+     drawTxt('requestControl', 6, 1, 0.838, 0.450, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(requestControl) , 6, 1, 0.94, 0.450, 0.6, 0, 255, 0, 255)
+     drawTxt('doesEntityExist', 6, 1, 0.838, 0.480, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(doesEntityExist) , 6, 1, 0.94, 0.480, 0.6, 0, 255, 0, 255)
+    end	
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------this checks if the spawned entity exists and moves it as player pushes buttons---------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -436,9 +416,16 @@ Citizen.CreateThread(function()
 	dude6 = IsPlayerFreeAiming(dude5)
 	if dude6 ~=false then
 	 dude10 = Citizen.InvokeNative(0x2975C866E6713290, dude5, Citizen.PointerValueInt(), Citizen.ResultAsString(dude10))
-	 Citizen.Trace(''..tostring(dude10))
-	 Citizen.Trace(''..tostring(GetEntityModel(dude10)))
-	 Citizen.Trace(''..tostring(GetEntityCoords(dude10)))	 
+	 Citizen.Trace('**********************')
+	 Citizen.Trace('what player is aiming at')
+	 Citizen.Trace('**********************')
+	 Citizen.Trace('entity ID = '..tostring(dude10))
+	 Citizen.Trace('entity model hash = '..tostring(GetEntityModel(dude10)))
+	 Citizen.Trace('entity coords = '..tostring(GetEntityCoords(dude10)))
+	 Citizen.Trace('entity rotation = '..tostring(GetEntityRotation(dude10)))
+	 Citizen.Trace('entity interior = '..tostring(GetInteriorFromEntity(dude10)))
+	 Citizen.Trace('entity roomKey = '..tostring(GetRoomKeyFromEntity(dude10)))
+	 Citizen.Trace('object_to_net = '..tostring(entityNetworkID))
 	end
 	 if dude6 ~=false and deleteGunToggle ==true then 
 	 Wait(0) 
@@ -446,9 +433,9 @@ Citizen.CreateThread(function()
 	dude10 = Citizen.InvokeNative(0x2975C866E6713290, dude5, Citizen.PointerValueInt(), Citizen.ResultAsString(dude10))
 	dude12 = GetEntityModel(dude10)
 	dude16 = GetEntityCoords(dude10)
-	Citizen.Trace(''..tostring(dude10))
-	Citizen.Trace(''..tostring(dude12))
-	Citizen.Trace(''..tostring(dude16))
+	Citizen.Trace('entity '..tostring(dude10))
+	Citizen.Trace('entity model '..tostring(dude12))
+	Citizen.Trace('entity coords '..tostring(dude16))
 	  isMission = IsEntityAMissionEntity(dude10)
 	  isPed = IsEntityAPed(dude10)
 	  isAnObj = IsEntityAnObject(dude10)
@@ -508,16 +495,17 @@ RequestScaleformMovie("instructional_buttons")
 ----------------------this gets a player if they are not the current player-----------------------
 --------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
-     
-     currentPlayerName = GetPlayerName(PlayerId())
-     temp3 = {currentPlayerName, handle}
-     temp0 = GetPlayerPed(PlayerId())
      temp1 = -1
+     handle = NetworkHandleFromPlayer(PlayerId(), 13)
+     currentPlayerName = GetPlayerName(PlayerId())
+	 playerPedID = GetPlayerPed(PlayerId())
+	 playerID = PlayerId()
+	 playerID = tostring(playerID)
+     temp3 = {currentPlayerName, handle, playerPedID}      
 	 while temp1 <=3 do
-	  Citizen.Wait(10000)
+	  Citizen.Wait(10)
       temp2 = IntToPlayerindex(temp1)
-	   if GetPlayerPed(temp2) ~= temp0 then 
-	        
+	   if GetPlayerPed(temp2) ~= temp0 then         
 	   end	
 	   if DoesEntityExist(GetPlayerPed(temp2)) then 
 	    playerModel = GetEntityModel(GetPlayerPed(temp2))
@@ -528,18 +516,64 @@ Citizen.CreateThread(function()
 	   else 
 	   name = GetPlayerName(temp2)
 	   end	   
-	  
-	  handle = NetworkHandleFromPlayer(temp1, 13)
 	  temp1 = temp1+1
---	  Citizen.Trace("current playerID: "..tostring(PlayerId()))
---	  Citizen.Trace("current player ped ID: "..tostring(temp0))
---	  Citizen.Trace("iterator: "..tostring(temp1))	  
---	  Citizen.Trace("player pedID: "..tostring(GetPlayerPed(temp2)))
---	  Citizen.Trace("player name: "..tostring(name))
---	  Citizen.Trace("handle: "..tostring(handle))
---	  Citizen.Trace("is r* banned: "..tostring(IsSocialclubBanned()))
+
 	  if temp1 >= 3 then 
 	    temp1 = -1
 	  end
 	 end   
 end)
+
+Citizen.CreateThread(function()
+    while true do	
+     Citizen.Wait(3000)
+	 --Citizen.Trace("get hash key of cinscreen: "..tostring(GetHashKey("cinscreen")))
+	 --Citizen.Trace("is interior ready: "..tostring(IsInteriorReady(258561)))
+	 --Citizen.Trace("playerId: "..tostring(PlayerId()))
+	 --Citizen.Trace("get name of this thread: "..tostring(GetIdOfThisThread()))
+	 --Citizen.Trace("Player position: "..tostring(GetEntityCoords(GetPlayerPed(PlayerId()))))
+	 --Citizen.Trace("player rotation: "..tostring(GetEntityRotation(GetPlayerPed(PlayerId()))))
+	 --Citizen.Trace("player ped id: "..tostring(NetworkGetPlayerIndexFromPed(PlayerPedId())))
+	 --Citizen.Trace("get player ped: "..tostring(temp0))
+	 --Citizen.Trace("int to player index: "..tostring(temp2))
+	 --Citizen.Trace("temp1: "..tostring(temp1))
+	 --Citizen.Trace("spawned entity ID: "..tostring(a))
+	 --Citizen.Trace("interior ready: "..tostring(IsInteriorReady(258561)))
+	 --Citizen.Trace("get closest object of type: "..tostring(GetClosestObjectOfType(GetEntityCoords(GetPlayerPed(PlayerId()), true), 20.1, stuff, 0, 0, 0)))
+	 --Citizen.Trace("get network id of player: "..tostring(NetworkGetNetworkIdFromEntity(GetPlayerPed())))
+	 --Citizen.Trace("current interior ID: "..tostring(GetInteriorFromEntity(GetPlayerPed(-1))))
+	 --Citizen.Trace("current roomkey: "..tostring(GetRoomKeyFromEntity(GetPlayerPed(-1))))
+	 --Citizen.Trace("spawned entity coords: "..tostring(GetEntityCoords(a)))
+	 --Citizen.Trace("spawned entity heading: "..tostring(GetEntityHeading(a)))
+	 --Citizen.Trace("spawned entity rotation: "..tostring(GetEntityRotation(a)))      
+	 --Citizen.Trace("spawned entityID : "..tostring(a))
+	 --Citizen.Trace("get render cam : "..tostring(renderCam))
+	 --Citizen.Trace("spawned vehID : "..tostring(spawnedVeh))
+	 --Citizen.Trace("has veh model loaded : "..tostring(HasModelLoaded(veh)))
+	 --Citizen.Trace("spawned pedID : "..tostring(spawnPed))
+	 --Citizen.Trace("does cam exist : "..tostring(DoesCamExist(26379945)))
+	 --Citizen.Trace("closest entity of type: "..tostring(closestEntity))
+	 --Citizen.Trace("entity roomKey: "..tostring(entityRoomKey))
+	 --Citizen.Trace("entity interiorID: "..tostring(entityInteriorID))
+	 --Citizen.Trace("bunker interiorID: "..tostring(bunkerInterior))	 
+	 --Citizen.Trace("net to ped playerped: "..tostring(PlayerId()))
+	 --Citizen.Trace("playerped: "..tostring(GetPlayerPed(PlayerId())))
+	 --Citizen.Trace("interior groupID: "..tostring(interiorGroupID))
+	 --Citizen.Trace("spawned entity visible: "..tostring(IsEntityVisible(a)))
+	 --Citizen.Trace("spawned veh visible: "..tostring(IsEntityVisible(spawnedVeh)))
+	 --Citizen.Trace("spawned ped visible: "..tostring(IsEntityVisible(spawnPed)))
+     --Citizen.Trace("spawned ped variations: "..tostring(pedVariationCount))
+	 --Citizen.Trace("spawned ped current variation: "..tostring(pedVariation))
+	 --Citizen.Trace("spawned ped current  drawable variation: "..tostring(pedDrawableVariation))
+	 --Citizen.Trace("spawned ped number of drawable variation: "..tostring(numberOfDrawableVariations))
+	 --Citizen.Trace("closest pedCount: "..tostring(closestPedCount))
+	 --Citizen.Trace("closest ped: "..tostring(closestPed))
+	 --Citizen.Trace("closest veh: "..tostring(closestVeh))
+	 --Citizen.Trace("nearby ped count: "..tostring(pedCount))
+	 --Citizen.Trace("nearby peds: "..tostring(pedz))
+	 --Citizen.Trace("get closest veh(buggyB): "..tostring(GetClosestVehicle(887.824, -3236.251, -98.8946, 1.0, -769147461, 70)))
+     --Citizen.Trace("get closest veh(buggyA): "..tostring(GetClosestVehicle(890.708, -3236.804, -98.8961, 50.0, -769147461, 70)))
+end
+end)
+
+
