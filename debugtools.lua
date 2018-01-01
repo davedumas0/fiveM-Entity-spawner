@@ -1,4 +1,4 @@
-
+--this is a fuction for posting text on the screen
 local showInfo = true
 function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
 	SetTextFont(font)
@@ -18,6 +18,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------put entity name or hash here---------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------
+--updated now it puts the entity your aiming at in the spawner
 function things(modelHash)
    stuff = modelHash
 end
@@ -65,20 +66,30 @@ Citizen.CreateThread(function()
 	 entityNetworkID = NetworkGetNetworkIdFromEntity(dude10)
      doesEntityExist = NetworkDoesNetworkIdExist(NetworkGetNetworkIdFromEntity(dude10))
       SetEntityAsMissionEntity(dude10, 1, 0)
+--this draws a bunch of info about the entity your aiming at on the screen
+   --this draws a black backdrop to print the text to			
      DrawSprite("shared","bggradient", 0.85, 0.39, 0.28, 0.60, 90.0, 0, 0, 0, 200)
+   --this draws the title of the info screen
      drawTxt('DEBUG INFO ', 6, 1, 0.88, 0.097 , 0.5, 255, 0, 0, 255)
+   --this draws the local entityID to the info screen			
      drawTxt('entity ID: ', 6, 1, 0.80, 0.125 , 0.6, 255, 255, 255, 255)
      drawTxt(tostring(dude10), 6, 1, 0.91, 0.125 , 0.6, 0, 255, 255, 255)
+   --this draws the entity model hash on the info screen
      drawTxt('entity model hash: ', 6, 1, 0.80, 0.150 , 0.6, 255, 255, 255, 255)
      drawTxt(tostring(GetEntityModel(dude10)), 6, 1, 0.91, 0.150 , 0.6, 0, 255, 255, 255)
+   --this draws the interiorID of the entity
      drawTxt('entity interior: ', 6, 1, 0.80, 0.177, 0.6, 255, 255, 255, 255)
      drawTxt(tostring(GetInteriorFromEntity(dude10)) , 6, 1, 0.91, 0.177, 0.6, 0, 255, 255, 255)
+   --this draws the networkID of the entity
      drawTxt('networkID: ', 6, 1, 0.80, 0.200, 0.6, 255, 255, 255, 255)
      drawTxt(tostring(NetworkGetNetworkIdFromEntity(dude10)) , 6, 1, 0.91, 0.200, 0.6, 0, 255, 255, 255)
+   --this draws wheather the enitity is networked or not
      drawTxt('is entity networked: ', 6, 1, 0.81, 0.230, 0.6, 255, 255, 255, 255)
      drawTxt(tostring(isEntityNetworked) , 6, 1, 0.91, 0.230, 0.6, 0, 255, 255, 255)
+   --this draws wheather the entity is in network control
      drawTxt('requestControl', 6, 1, 0.81, 0.260, 0.6, 255, 255, 255, 255)
      drawTxt(tostring(requestControl) , 6, 1, 0.91, 0.260, 0.6, 0, 255, 255, 255)
+				
      drawTxt('doesEntityExist', 6, 1, 0.81, 0.290, 0.6, 255, 255, 255, 255)
      drawTxt(tostring(doesEntityExist) , 6, 1, 0.91, 0.290, 0.6, 0, 255, 255, 255)
      drawTxt('entity X coords: ', 6, 1, 0.80, 0.320, 0.6 , 0, 255, 0, 255)
