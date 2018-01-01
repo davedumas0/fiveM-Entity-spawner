@@ -59,12 +59,13 @@ Citizen.CreateThread(function()
 	  requestControl = NetworkRequestControlOfEntity(dude10)
 	local entityCoords = GetEntityCoords(dude10)
 	local entityRot = GetEntityRotation(dude10, 2)
-
+    local playerRot = GetEntityRotation(GetPlayerPed(), 2)
+	local playerCoords = GetEntityCoords(GetPlayerPed())
 	local isEntityNetworked = NetworkHasControlOfEntity(dude10)
 	 entityNetworkID = NetworkGetNetworkIdFromEntity(dude10)
      doesEntityExist = NetworkDoesNetworkIdExist(NetworkGetNetworkIdFromEntity(dude10))
       SetEntityAsMissionEntity(dude10, 1, 0)
-     DrawSprite("shared","bggradient", 0.88, 0.31, 0.25, 0.50, 90.0, 0, 0, 0, 200)
+     DrawSprite("shared","bggradient", 0.85, 0.39, 0.28, 0.60, 90.0, 0, 0, 0, 200)
      drawTxt('DEBUG INFO ', 6, 1, 0.88, 0.097 , 0.5, 255, 0, 0, 255)
      drawTxt('entity ID: ', 6, 1, 0.80, 0.125 , 0.6, 255, 255, 255, 255)
      drawTxt(tostring(dude10), 6, 1, 0.91, 0.125 , 0.6, 0, 255, 255, 255)
@@ -92,11 +93,26 @@ Citizen.CreateThread(function()
      drawTxt(tostring(entityRot.y) , 6, 1, 0.91, 0.440, 0.6, 0, 255, 0, 255)
      drawTxt('entity Z rotation: ', 6, 1, 0.80, 0.470, 0.6, 0, 255, 0, 255)
      drawTxt(tostring(entityRot.z) , 6, 1, 0.91, 0.470, 0.6, 0, 255, 0, 255)
+     drawTxt('Player X rotation: ', 6, 1, 0.80, 0.500, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerRot.x) , 6, 1, 0.91, 0.500, 0.6, 0, 0, 255, 255)
+     drawTxt('Player Y rotation: ', 6, 1, 0.80, 0.530, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerRot.y) , 6, 1, 0.91, 0.530, 0.6, 0, 0, 255, 255)
+     drawTxt('Player Z rotation: ', 6, 1, 0.80, 0.560, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerRot.z) , 6, 1, 0.91, 0.560, 0.6, 0, 0, 255, 255)
+     drawTxt('Player X position: ', 6, 1, 0.80, 0.590, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerCoords.x) , 6, 1, 0.91, 0.590, 0.6, 0, 255, 0, 255)
+     drawTxt('Player Y position: ', 6, 1, 0.80, 0.620, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerCoords.y) , 6, 1, 0.91, 0.620, 0.6, 0, 255, 0, 255)
+     drawTxt('Player Z position: ', 6, 1, 0.80, 0.650, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerCoords.z) , 6, 1, 0.91, 0.650, 0.6, 0, 255, 0, 255)
+     drawTxt('Player Heading: ', 6, 1, 0.80, 0.690, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(GetEntityHeading(GetPlayerPed())) , 6, 1, 0.91, 0.690, 0.6, 0, 255, 0, 255)
+	 
 	end	
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------this checks if the spawned entity exists and moves it as player pushes buttons---------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------
-	if not DoesEntityExist(a) or DoesEntityExist(GetClosestObjectOfType(playerCoordsX, playerCoordsY, playerCoordsZ, 50.0, stuff, 0, 1, 0)) then
+	if not DoesEntityExist(a) or DoesEntityExist(GetClosestObjectOfType(playerCoordsX, playerCoordsY, playerCoordsZ, 50.0, stuff, 0, 1, 0))  then
 	 a = GetClosestObjectOfType(playerCoordsX, playerCoordsY, playerCoordsZ, 50.0, stuff, 0, 1, 0)
     end
     if DoesEntityExist(a) then
@@ -137,7 +153,7 @@ Citizen.CreateThread(function()
       end
 --home key
 -- if control "home" key is pressed then it spawns the entity of your choosing	 
-	 if IsControlPressed(0, 213) then
+	 if IsControlJustPressed(0, 213) then
 	    Citizen.Wait(500)
 		 spawnStuff(stuff)
 	 end
@@ -354,19 +370,78 @@ end
 function spawnStuff(stuff)
 Citizen.CreateThread(function() 
 --this requests the model of what is to be spawned
+   if DoesEntityExist(dude10) then
+    dude10Model = GetEntityModel(dude10)
+	 stuff = dude10Model
+   end
 	if not HasModelLoaded(stuff) then
 	 Citizen.Wait(0)
 	 RequestModel(stuff)
 --if model is a veh then spawn a veh	 
 	end
-	if IsModelAVehicle(stuff) then 
-	 spawnedVeh = CreateVehicle(stuff, playerCoordsX, playerCoordsY, playerCoordsZ, playerHeading, 0, 0, 0)
+	if IsEntityAVehicle(dude10) then 
+	 spawnedVeh = CreateVehicle(stuff, playerCoordsX, playerCoordsY, playerCoordsZ, playerHeading, 1, 1, 0)
 	end
---spawn the object	
-	a = ObjToNet(CreateObjectNoOffset(stuff, playerCoordsX+1, playerCoordsY+1, playerCoordsZ, 1, 0, 0))
+	if IsEntityAPed(dude10) then
+      dude10CofigFlag = GetPedConfigFlag(dude10)
+      dude10DrawVar_0 = GetPedDrawableVariation(dude10, 0)
+	   dude10TexVar_0 = GetPedTextureVariation(dude10, 0)
+	   dude10PaletteVar_0 = GetPedPaletteVariation(dude10, 0)
+	  dude10DrawVar_1 = GetPedDrawableVariation(dude10, 1)
+	   dude10TexVar_1 = GetPedTextureVariation(dude10, 1)
+	   dude10PaletteVar_1 = GetPedPaletteVariation(dude10, 1)
+	  dude10DrawVar_2 = GetPedDrawableVariation(dude10, 2)
+	   dude10TexVar_2 = GetPedTextureVariation(dude10, 2)
+	   dude10PaletteVar_2 = GetPedPaletteVariation(dude10, 2)
+	  dude10DrawVar_3 = GetPedDrawableVariation(dude10, 3)
+	   dude10TexVar_3 = GetPedTextureVariation(dude10, 3)
+	   dude10PaletteVar_3 = GetPedPaletteVariation(dude10, 3)
+	  dude10DrawVar_4 = GetPedDrawableVariation(dude10, 4)
+	   dude10TexVar_4 = GetPedTextureVariation(dude10, 4)
+	   dude10PaletteVar_4 = GetPedPaletteVariation(dude10, 4)
+	  dude10DrawVar_5 = GetPedDrawableVariation(dude10, 5)
+	   dude10TexVar_5 = GetPedTextureVariation(dude10, 5)
+	   dude10PaletteVar_5 = GetPedPaletteVariation(dude10, 5)
+	  dude10DrawVar_6 = GetPedDrawableVariation(dude10, 6)
+	   dude10TexVar_6 = GetPedTextureVariation(dude10, 6)
+	   dude10PaletteVar_6 = GetPedPaletteVariation(dude10, 6)
+	  dude10DrawVar_7 = GetPedDrawableVariation(dude10, 7)
+	   dude10TexVar_7 = GetPedTextureVariation(dude10, 7)
+	   dude10PaletteVar_7 = GetPedPaletteVariation(dude10, 7)
+	  dude10DrawVar_8 = GetPedDrawableVariation(dude10, 8)
+	   dude10TexVar_8 = GetPedTextureVariation(dude10, 8)
+	   dude10PaletteVar_8 = GetPedPaletteVariation(dude10, 8)
+	  dude10DrawVar_9 = GetPedDrawableVariation(dude10, 9)
+	   dude10TexVar_9 = GetPedTextureVariation(dude10, 9)
+	   dude10PaletteVar_9 = GetPedPaletteVariation(dude10, 9)
+	  dude10DrawVar_10 = GetPedDrawableVariation(dude10, 10)
+	   dude10TexVar_10 = GetPedTextureVariation(dude10, 10)
+	   dude10PaletteVar_10 = GetPedPaletteVariation(dude10, 10)
+	  dude10DrawVar_11 = GetPedDrawableVariation(dude10, 11)
+	   dude10TexVar_11 = GetPedTextureVariation(dude10, 11)
+	   dude10PaletteVar_11 = GetPedPaletteVariation(dude10, 11)
+	  dude10PedType = GetPedType(dude10)
+	 spawnedPed = CreatePed(dude10PedType, stuff, playerCoordsX + 1, playerCoordsY + 1, playerCoordsZ, playerHeading, 0, 1)
+	  SetPedComponentVariation(spawnedPed, 0, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 1, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 2, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 3, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 4, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 5, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 6, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 7, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 8, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 9, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 10, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	  SetPedComponentVariation(spawnedPed, 11, dude10DrawVar_0, dude10TexVar_0, dude10PaletteVar_0)
+	end
+--spawn the object
+   if IsEntityAnObject(dude10) then
+	a = ObjToNet(CreateObjectNoOffset(stuff, playerCoordsX+1, playerCoordsY+1, playerCoordsZ, 1, 1, 0))
 	setCollisionStuff(true)
     freezeStuff()
-  SetEntityHeading(a, playerHeading)
+	SetEntityHeading(a, playerHeading)
+   end	
 end)
 end
 
