@@ -1,10 +1,13 @@
+
+ 
+
 local options = {
-    x = 0.11,
+    x = 0.88,
     y = 0.2,
     width = 0.22,
     height = 0.04,
     scale = 0.4,
-    font = 0,
+    font = 2,
     menu_title = "Main obj Menu",
     menu_subtitle = "Categories",
     color_r = 30,
@@ -148,20 +151,19 @@ function Notify(text)
     DrawNotification(false, false)
 end
 
-function drawTxt(x,y ,width,height,scale, text, r,g,b,a, outline)
-    SetTextFont(0)
-    SetTextProportional(0)
-    SetTextScale(scale, scale)
-    SetTextColour(r, g, b, a)
-    SetTextDropShadow(0, 0, 0, 0,255)
-    SetTextEdge(1, 0, 0, 0, 255)
-    SetTextDropShadow()
-    if(outline)then
-        SetTextOutline()
-    end
-    SetTextEntry("STRING")
-    AddTextComponentString(text)
-    DrawText(x - width/2, y - height/2 + 0.005)
+function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
+	SetTextFont(font)
+	SetTextProportional(0)
+	SetTextScale(scale, scale)
+	SetTextColour(r, g, b, a)
+	SetTextDropShadow(0, 0, 0, 0, 255)
+	SetTextEdge(1, 0, 0, 0, 255)
+	SetTextDropShadow()
+	SetTextOutline()
+	SetTextCentre(centre)
+	SetTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawText(x, y)
 end
 
 function DisplayHelpText(str)
@@ -749,6 +751,3 @@ Citizen.CreateThread(function()
                     Menu.renderGUI(options) -- Draw menu on each tick if Menu.hidden = false
                 end       
 end)
-
-
-
