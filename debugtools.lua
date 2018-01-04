@@ -1,5 +1,18 @@
---this is a fuction for posting text on the screen
+RequestStreamedTextureDict("fiveM_headerss")
+RequestStreamedTextureDict("freemodeTextD")
+local debugWindowTextureDict = "shared"
+local debugWindowTexture = "bggradient"
+local debugWindowXPos = 0.85
+local debugWindowYPos = 0.42
+local debugWindowSizeX = 0.28
+local debugWindowSizeY = 0.70
+local debugWindowHeading = 0.0
+local debugWindowColorR = 0
+local debugWindowColorG = 0
+local debugWindowColorB = 0
+local debugWindowTranparency = 200
 local showInfo = true
+local debugWindowConfigMenu = true
 function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
 	SetTextFont(font)
 	SetTextProportional(0)
@@ -18,7 +31,6 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------put entity name or hash here---------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------
---updated now it puts the entity your aiming at in the spawner
 function things(modelHash)
    stuff = modelHash
 end
@@ -34,9 +46,12 @@ things(1098542403)
 
 Citizen.CreateThread(function()	
   while true do
-    if IsControlPressed(0, 21) and IsControlJustPressed(1, 168) then
+    if IsControlPressed(0, 21) and IsControlJustPressed(1, 168) and not IsControlPressed(1, 62) then
      showInfo = not showInfo
-   end  
+    end 
+	if IsControlPressed(0, 62) and IsControlJustPressed(1, 168) and not IsControlPressed(0, 21) then
+     debugWindowConfigMenu = not debugWindowConfigMenu
+    end
      Citizen.Wait(0) 
 	 playerPed = GetPlayerPed(PlayerId())
      playerCoords = GetEntityCoords(GetPlayerPed(PlayerId()), true)
@@ -50,6 +65,7 @@ Citizen.CreateThread(function()
 	 entityInteriorID = GetInteriorFromEntity(a)
      entityCoords = GetEntityCoords(closestEntity, true)
 	 interiorGroupID = GetInteriorGroupId(entityInteriorID)
+
      ForceRoomForEntity(a, playerInteriorID, PlayerRoomKey)
 	 EntityInterior = GetInteriorFromEntity(a)
 	 EntityRoomKey = GetRoomKeyFromEntity(a)
@@ -58,68 +74,142 @@ Citizen.CreateThread(function()
 	  --NetworkRegisterEntityAsNetworked(dude10)
 	  --NetworkSetEntityVisibleToNetwork(dude10, true)
 	  requestControl = NetworkRequestControlOfEntity(dude10)
+ 
 	local entityCoords = GetEntityCoords(dude10)
 	local entityRot = GetEntityRotation(dude10, 2)
     local playerRot = GetEntityRotation(GetPlayerPed(), 2)
 	local playerCoords = GetEntityCoords(GetPlayerPed())
 	local isEntityNetworked = NetworkHasControlOfEntity(dude10)
+	  if requestControl == 1 then
+	   networkHasControl = 'yes'
+	  elseif requestControl == false then
+	   networkHasControl = 'no'
+	  end
+	  if isEntityNetworked == 1 then
+	   isNetworked = 'yes'
+	  elseif isEntityNetworked == false then
+	   isNetworked = 'no'
+	  end
+	  if doesEntityExist == 1 then
+	   networkIDExist = 'yes'
+	  elseif doesEntityExist == false then
+	   networkIDExist = 'no'
+	  end	  
+	  
 	 entityNetworkID = NetworkGetNetworkIdFromEntity(dude10)
      doesEntityExist = NetworkDoesNetworkIdExist(NetworkGetNetworkIdFromEntity(dude10))
       SetEntityAsMissionEntity(dude10, 1, 0)
---this draws a bunch of info about the entity your aiming at on the screen
-   --this draws a black backdrop to print the text to			
-     DrawSprite("shared","bggradient", 0.85, 0.39, 0.28, 0.60, 90.0, 0, 0, 0, 200)
-   --this draws the title of the info screen
-     drawTxt('DEBUG INFO ', 6, 1, 0.88, 0.097 , 0.5, 255, 0, 0, 255)
-   --this draws the local entityID to the info screen			
-     drawTxt('entity ID: ', 6, 1, 0.80, 0.125 , 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(dude10), 6, 1, 0.91, 0.125 , 0.6, 0, 255, 255, 255)
-   --this draws the entity model hash on the info screen
-     drawTxt('entity model hash: ', 6, 1, 0.80, 0.150 , 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(GetEntityModel(dude10)), 6, 1, 0.91, 0.150 , 0.6, 0, 255, 255, 255)
-   --this draws the interiorID of the entity
-     drawTxt('entity interior: ', 6, 1, 0.80, 0.177, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(GetInteriorFromEntity(dude10)) , 6, 1, 0.91, 0.177, 0.6, 0, 255, 255, 255)
-   --this draws the networkID of the entity
-     drawTxt('networkID: ', 6, 1, 0.80, 0.200, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(NetworkGetNetworkIdFromEntity(dude10)) , 6, 1, 0.91, 0.200, 0.6, 0, 255, 255, 255)
-   --this draws wheather the enitity is networked or not
-     drawTxt('is entity networked: ', 6, 1, 0.81, 0.230, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(isEntityNetworked) , 6, 1, 0.91, 0.230, 0.6, 0, 255, 255, 255)
-   --this draws wheather the entity is in network control
-     drawTxt('requestControl', 6, 1, 0.81, 0.260, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(requestControl) , 6, 1, 0.91, 0.260, 0.6, 0, 255, 255, 255)
-				
-     drawTxt('doesEntityExist', 6, 1, 0.81, 0.290, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(doesEntityExist) , 6, 1, 0.91, 0.290, 0.6, 0, 255, 255, 255)
-     drawTxt('entity X coords: ', 6, 1, 0.80, 0.320, 0.6 , 0, 255, 0, 255)
-     drawTxt(tostring(entityCoords.x) , 6, 1, 0.91, 0.320, 0.6, 0, 255, 0, 255)
-     drawTxt("entity Y coords: ", 6, 1, 0.80, 0.350, 0.6, 0, 255, 0, 255)
-     drawTxt(tostring(entityCoords.y) , 6, 1, 0.91, 0.350, 0.6, 0, 255, 0, 255)
-     drawTxt("entity Z coords: ", 6, 1, 0.80, 0.380, 0.6, 0, 255, 0, 255)
-     drawTxt(tostring(entityCoords.z) , 6, 1, 0.91, 0.380, 0.6, 0, 255, 0, 255)
-     drawTxt('entity X rotation: ', 6, 1, 0.80, 0.410, 0.6, 0, 255, 0, 255)
-     drawTxt(tostring(entityRot.x) , 6, 1, 0.91, 0.410, 0.6, 0, 255, 0, 255)
-     drawTxt('entity Y rotation: ', 6, 1, 0.80, 0.440, 0.6, 0, 255, 0, 255)
-     drawTxt(tostring(entityRot.y) , 6, 1, 0.91, 0.440, 0.6, 0, 255, 0, 255)
-     drawTxt('entity Z rotation: ', 6, 1, 0.80, 0.470, 0.6, 0, 255, 0, 255)
-     drawTxt(tostring(entityRot.z) , 6, 1, 0.91, 0.470, 0.6, 0, 255, 0, 255)
-     drawTxt('Player X rotation: ', 6, 1, 0.80, 0.500, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(playerRot.x) , 6, 1, 0.91, 0.500, 0.6, 0, 0, 255, 255)
-     drawTxt('Player Y rotation: ', 6, 1, 0.80, 0.530, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(playerRot.y) , 6, 1, 0.91, 0.530, 0.6, 0, 0, 255, 255)
-     drawTxt('Player Z rotation: ', 6, 1, 0.80, 0.560, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(playerRot.z) , 6, 1, 0.91, 0.560, 0.6, 0, 0, 255, 255)
-     drawTxt('Player X position: ', 6, 1, 0.80, 0.590, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(playerCoords.x) , 6, 1, 0.91, 0.590, 0.6, 0, 255, 0, 255)
-     drawTxt('Player Y position: ', 6, 1, 0.80, 0.620, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(playerCoords.y) , 6, 1, 0.91, 0.620, 0.6, 0, 255, 0, 255)
-     drawTxt('Player Z position: ', 6, 1, 0.80, 0.650, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(playerCoords.z) , 6, 1, 0.91, 0.650, 0.6, 0, 255, 0, 255)
-     drawTxt('Player Heading: ', 6, 1, 0.80, 0.690, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(GetEntityHeading(GetPlayerPed())) , 6, 1, 0.91, 0.690, 0.6, 0, 255, 0, 255)
+     DrawSprite(debugWindowTextureDict,debugWindowTexture, debugWindowXPos, debugWindowYPos, debugWindowSizeX, debugWindowSizeY, debugWindowHeading, debugWindowColorR, debugWindowColorG, debugWindowColorB, debugWindowTranparency)
+	 DrawSprite("fiveM_headerss", "header-295-2", debugWindowXPos, debugWindowYPos - 0.325, 0.131, 0.043, 0.0, 255, 255, 255, 255)
+     drawTxt('dave\'s ', 6, 1, debugWindowXPos - 0.030, debugWindowYPos - 0.343 , 0.5, 0, 255, 0, 255)
+	 drawTxt('DEBUG INFO ', 6, 1, debugWindowXPos + 0.023, debugWindowYPos - 0.343 , 0.5, 255, 0, 0, 255)
+     drawTxt('entity ID: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.310 , 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(dude10), 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.310 , 0.6, 0, 255, 255, 255)
+     drawTxt('entity model hash: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.280 , 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(GetEntityModel(dude10)), 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.280 , 0.6, 0, 255, 255, 255)
+     drawTxt('entity interior: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.250, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(GetInteriorFromEntity(dude10)) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.250, 0.6, 0, 255, 255, 255)
+     drawTxt('networkID: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.220, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(NetworkGetNetworkIdFromEntity(dude10)) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.220, 0.6, 0, 255, 255, 255)
+     drawTxt('is entity networked: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.190, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(isNetworked) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.190, 0.6, 0, 255, 255, 255)
+     drawTxt('does network have control', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.160, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(networkHasControl) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.160, 0.6, 0, 255, 255, 255)
+     drawTxt('does networkID exist', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.130, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(networkIDExist) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.130, 0.6, 0, 255, 255, 255)
+     drawTxt('entity X coords: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.100, 0.6 , 0, 255, 0, 255)
+     drawTxt(tostring(entityCoords.x) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.100, 0.6, 0, 255, 0, 255)
+     drawTxt("entity Y coords: ", 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.070, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityCoords.y) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.070, 0.6, 0, 255, 0, 255)
+     drawTxt("entity Z coords: ", 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.040, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityCoords.z) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.040, 0.6, 0, 255, 0, 255)
+     drawTxt('entity X rotation: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos - 0.010, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityRot.x) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos - 0.010, 0.6, 0, 255, 0, 255)
+     drawTxt('entity Y rotation: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.020, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityRot.y) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.020, 0.6, 0, 255, 0, 255)
+     drawTxt('entity Z rotation: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.050, 0.6, 0, 255, 0, 255)
+     drawTxt(tostring(entityRot.z) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.050, 0.6, 0, 255, 0, 255)
+     drawTxt('Player X rotation: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.08, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerRot.x) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.080, 0.6, 0, 0, 255, 255)
+     drawTxt('Player Y rotation: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.110, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerRot.y) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.110, 0.6, 0, 0, 255, 255)
+     drawTxt('Player Z rotation: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.140, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerRot.z) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.140, 0.6, 0, 0, 255, 255)
+     drawTxt('Player X position: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.170, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerCoords.x) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.170, 0.6, 0, 255, 0, 255)
+     drawTxt('Player Y position: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.20, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerCoords.y) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.20, 0.6, 0, 255, 0, 255)
+     drawTxt('Player Z position: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.23, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(playerCoords.z) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.23, 0.6, 0, 255, 0, 255)
+     drawTxt('Player Heading: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.26, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(GetEntityHeading(GetPlayerPed())), 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.26, 0.6, 0, 255, 0, 255)
+	 drawTxt('please note the rotation \"order\" is always 2 ', 6, 1, debugWindowXPos, debugWindowYPos + 0.29, 0.6, 255, 0, 0, 150)
 	 
 	end	
+	if debugWindowConfigMenu == true then
+--------------------------------------------------------------------------------------------------------------
+local mouseX = GetControlNormal(2, 239)
+local mouseY = GetControlNormal(2, 240)
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------config button "move window"---------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+local moveWindowButtotLeftEdge = (debugWindowXPos + debugWindowSizeX / 3) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+local moveWindowButtotRightEdge = (debugWindowXPos + debugWindowSizeX / 3) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+local moveWindowButtotTopEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
+local moveWindowButtotBottonEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------config button "change color"---------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+local buttonX3 = (debugWindowXPos) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+local buttonX4 = (debugWindowXPos) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+local buttonY3 = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
+local buttonY4 = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2
+SetCurrentPedWeapon(PlayerPedId(-1), GetHashKey("weapon_unarmed"))
+	 DrawSprite("fiveM_headerss", "header-295-2", debugWindowXPos , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), debugWindowSizeX, debugWindowSizeY - 0.55, 0.0, 255, 255, 255, 255)
+	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos - debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 255, 255, 255, 255)
+	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 255, 255, 255, 255)
+	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), (debugWindowSizeY - 0.58), 0.0, 0, 0, 0, 200)
+	  drawTxt('move \n window', 6, 1, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 ), 0.6, 255, 255, 255, 255)
+	  ShowCursorThisFrame()
+	  
+	  if (mouseX > moveWindowButtotLeftEdge and mouseX < moveWindowButtotRightEdge) and (mouseY >= moveWindowButtotTopEdge and mouseY <= buttonY2) then
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
+	    moveWindow = true
+	    if IsControlJustPressed(2, 237) and moveWindow == true then
+         moveWindowSprite = true
+		end   
+	   else
+        moveWindow = false	   
+	   end
+	   
+	  if (mouseX > buttonX3 and mouseX < buttonX4) and (mouseY >= buttonY3 and mouseY <= buttonY4) then
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
+	    windowColor = true
+	    if IsControlJustPressed(2, 237) and moveWindow == true then
+         changeColor = true
+		end   
+	   else
+        windowColor = false	   
+	   end
+  
+        if moveWindowSprite == true then
+		 DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos), 0.05, 0.05, 0.0, 255, 255, 255, 150)
+		  if (mouseX > (debugWindowXPos - 0.05) and mouseX < (debugWindowXPos + 0.05)) and (mouseY >= (debugWindowYPos - 0.05) and mouseY <= (debugWindowYPos + 0.05)) then
+		    DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos), 0.05, 0.05, 0.0, 0, 0, 255, 150)
+		   if IsControlPressed(2, 237) then
+		    DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos), 0.05, 0.05, 0.0, 0, 255, 0, 255)
+		    debugWindowXPos = mouseX
+			debugWindowYPos = mouseY
+		   end
+
+		   if IsControlJustReleased(2, 237) then
+		    moveWindowSprite = false
+		   end
+		  end
+		end
+
+
+	 end
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------this checks if the spawned entity exists and moves it as player pushes buttons---------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------
