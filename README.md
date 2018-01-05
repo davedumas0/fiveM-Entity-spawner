@@ -5,7 +5,7 @@ this is a work in progress some things are 1/2 way implemented or not at all yet
 
 https://www.youtube.com/watch?v=SeSnrXXUuwI&feature=youtu.be
 
-~r~**my sprite pack is required**
+**my sprite pack is required**
 
 
 to toggle open the window hold left shift and f7 
