@@ -13,6 +13,7 @@ local debugWindowColorB = 0
 local debugWindowTranparency = 200
 local showInfo = true
 local debugWindowConfigMenu = true
+local moveWindowSprite = false
 function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
 	SetTextFont(font)
 	SetTextProportional(0)
@@ -172,7 +173,7 @@ SetCurrentPedWeapon(PlayerPedId(-1), GetHashKey("weapon_unarmed"))
 	  drawTxt('move \n window', 6, 1, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 ), 0.6, 255, 255, 255, 255)
 	  ShowCursorThisFrame()
 	  
-	  if (mouseX > moveWindowButtotLeftEdge and mouseX < moveWindowButtotRightEdge) and (mouseY >= moveWindowButtotTopEdge and mouseY <= buttonY2) then
+	  if (mouseX > moveWindowButtotLeftEdge and mouseX < moveWindowButtotRightEdge) and (mouseY >= moveWindowButtotTopEdge and mouseY <= moveWindowButtotBottonEdge) then
 	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
 	    moveWindow = true
 	    if IsControlJustPressed(2, 237) and moveWindow == true then
