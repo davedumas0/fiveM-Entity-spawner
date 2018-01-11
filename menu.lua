@@ -730,24 +730,44 @@ end
 ------------------------------------------------------------------
 --------------------------obj spawner-----------------------------
 ------------------------------------------------------------------
-function things1(stuff)
- things(stuff)
-spawnStuff(stuff)
-end
 
+function things1(stuff1)
+Citizen.CreateThread(function() 
+--this requests the model of what is to be spawned
+   RequestModel(stuff1)
+	if not HasModelLoaded(stuff1) then
+	 Citizen.Wait(0)	 
+--if model is a veh then spawn a veh	 
+	end
+--spawn the object
+
+	a = CreateObjectNoOffset(stuff1, playerCoordsX+1, playerCoordsY+1, playerCoordsZ, 1, 0, 0)
+	setCollisionStuff(true)
+    freezeStuff()
+	SetEntityHeading(a, playerHeading)
+	
+end)
+end
+--function things(stuff)
+ --things(stuff)
+--spawnStuff(stuff)
+--end
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---Press F5 to open/close menu
+--Press F7 to open/close menu
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-                    if IsControlJustReleased(1, 167) then -- INPUT_CELLPHONE_DOWN
+                    if IsControlJustReleased(1, 168) then -- INPUT_CELLPHONE_DOWN
                         Main() -- Menu to draw
                         Menu.hidden = not Menu.hidden -- Hide/Show the menu
                     end
                     Menu.renderGUI(options) -- Draw menu on each tick if Menu.hidden = false
                 end       
 end)
+
+
+
