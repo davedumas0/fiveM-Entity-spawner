@@ -1,18 +1,24 @@
 RequestStreamedTextureDict("fiveM_headerss")
 RequestStreamedTextureDict("freemodeTextD")
+RequestStreamedTextureDict("fiveM_BasicTextures")
+RequestStreamedTextureDict("fiveM_animatedTextures")
+function things(modelHash)
+   stuff = modelHash
+end
+
 local debugWindowTextureDict = "shared"
 local debugWindowTexture = "bggradient"
 local debugWindowXPos = 0.85
-local debugWindowYPos = 0.42
+local debugWindowYPos = 0.41
 local debugWindowSizeX = 0.28
-local debugWindowSizeY = 0.70
+local debugWindowSizeY = 0.71
 local debugWindowHeading = 0.0
 local debugWindowColorR = 0
 local debugWindowColorG = 0
 local debugWindowColorB = 0
 local debugWindowTranparency = 200
-local showInfo = true
-local debugWindowConfigMenu = true
+local showInfo = false
+local debugWindowConfigMenu = false
 local moveWindowSprite = false
 function drawTxt(text, font, centre, x, y, scale, r, g, b, a)
 	SetTextFont(font)
@@ -41,7 +47,8 @@ rgbButtonSlider_XPos_B = 0.1900
 rgbButtonSlider_YPos_B = 0.4540
 sizeX = 0.00880
 sizeY = 0.014
-
+saveOldColors = true
+loadOldColors = true
 function rgbControl()
        local mouseX = GetControlNormal(2, 239)
        local mouseY = GetControlNormal(2, 240)
@@ -1765,23 +1772,129 @@ function rgbControl()
 --------------------------------------------------------	
 ------------------rgb sliders end ----------------------
 --------------------------------------------------------
-	
-	
-
-     if IsControlJustPressed(0, 176) then
-	  
+     if IsControlJustPressed(0, 176) then	  
 	 end
-   
+end
+flagAnimationrun = 0
+function runFlagAnimation()
 
+ if flagAnimationrun == 0 then
+ DrawSprite("fiveM_animatedTextures", "flag0", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
  
+ elseif flagAnimationrun == 1 then
+ DrawSprite("fiveM_animatedTextures", "flag1", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+ 
+ elseif flagAnimationrun == 2 then
+ DrawSprite("fiveM_animatedTextures", "flag2", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+ 
+ elseif flagAnimationrun == 3 then
+ DrawSprite("fiveM_animatedTextures", "flag3", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                           
+                                                                                                                                            
+ elseif flagAnimationrun == 4 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag4", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                           
+                                                                                                                                            
+ elseif flagAnimationrun == 5 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag5", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+ 
+ elseif flagAnimationrun == 6 then
+ DrawSprite("fiveM_animatedTextures", "flag6", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                           
+                                                                                                                                            
+ elseif flagAnimationrun == 7 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag7", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                           
+                                                                                                                                            
+ elseif flagAnimationrun == 8 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag8", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+ 
+ elseif flagAnimationrun == 9 then
+ DrawSprite("fiveM_animatedTextures", "flag9", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+  
+ elseif flagAnimationrun == 10 then
+ DrawSprite("fiveM_animatedTextures", "flag10", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 11 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag11", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 12 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag12", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 2                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 13 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag13", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 14 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag14", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 15 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag15", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 16 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag16", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 17 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag17", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1                                                                                                            
+                                                                                                                                             
+ elseif flagAnimationrun == 18 then                                                                                                              
+ DrawSprite("fiveM_animatedTextures", "flag18", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+ 
+ elseif flagAnimationrun >= 19 then
+ DrawSprite("fiveM_animatedTextures", "flag19", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  flagAnimationrun = flagAnimationrun + 1
+ 
+ end
+ if flagAnimationrun >= 20 then
+  flagAnimationrun = 0
+ 
+ end
+end
+
+lightningAnimationrun = 0
+
+function runLightningAnimation()
+
+ if lightningAnimationrun == 0 then
+ DrawSprite("fiveM_animatedTextures", "frame_0_", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  lightningAnimationrun = lightningAnimationrun + 1
+ 
+ elseif lightningAnimationrun == 1 then
+ DrawSprite("fiveM_animatedTextures", "frame_1_", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  lightningAnimationrun = lightningAnimationrun + 1
+ 
+ elseif lightningAnimationrun == 2 then
+ DrawSprite("fiveM_animatedTextures", "frame_2_", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  lightningAnimationrun = lightningAnimationrun + 1
+ 
+ elseif lightningAnimationrun == 3 then
+ DrawSprite("fiveM_animatedTextures", "frame_3_", debugWindowXPos ,  debugWindowYPos , debugWindowSizeX, debugWindowSizeY, 0.0, 255, 255, 255, 150)
+  lightningAnimationrun = lightningAnimationrun + 1
+ end
+ if lightningAnimationrun > 3 then
+  lightningAnimationrun = 0
+ 
+ end
 end
 ---------------------------------------------------------------------------------------------------------------------------------
 --------------------------------------------put entity name or hash here---------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------
-function things(modelHash)
-   stuff = modelHash
-end
-things(1098542403)
+
+--things(1098542403)
 ----------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------this sets delete gun toggle to off --------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -1795,10 +1908,9 @@ Citizen.CreateThread(function()
   while true do
     if IsControlPressed(0, 21) and IsControlJustPressed(1, 168) and not IsControlPressed(1, 62) then
      showInfo = not showInfo
-    end 
-	if IsControlPressed(0, 62) and IsControlJustPressed(1, 168) and not IsControlPressed(0, 21) then
-     debugWindowConfigMenu = not debugWindowConfigMenu
     end
+     	
+
      Citizen.Wait(0) 
 	 playerPed = GetPlayerPed(PlayerId())
      playerCoords = GetEntityCoords(GetPlayerPed(PlayerId()), true)
@@ -1817,10 +1929,13 @@ Citizen.CreateThread(function()
 	 EntityInterior = GetInteriorFromEntity(a)
 	 EntityRoomKey = GetRoomKeyFromEntity(a)
 	if showInfo then
+	 if ((IsControlPressed(0, 62) and IsControlJustPressed(1, 168)) and not IsControlPressed(0, 21)) then
+      debugWindowConfigMenu = not debugWindowConfigMenu
+     end
 	  --SetNetworkIdExistsOnAllMachines(dude10, true)
 	  --NetworkRegisterEntityAsNetworked(dude10)
 	  --NetworkSetEntityVisibleToNetwork(dude10, true)
-	  requestControl = NetworkRequestControlOfEntity(dude10)
+	  requestControl = NetworkRequestControlOfNetworkId(NetworkGetNetworkIdFromEntity(dude10))
  
 	local entityCoords = GetEntityCoords(dude10)
 	local entityRot = GetEntityRotation(dude10, 2)
@@ -1842,11 +1957,24 @@ Citizen.CreateThread(function()
 	  elseif doesEntityExist == false then
 	   networkIDExist = 'no'
 	  end	  
-	  
+	  if IsEntityAPed(dude10) then
+	   if IsPedAPlayer(dude10) then
+	     dude11 = NetworkGetNetworkIdFromEntity(dude10) 
+	     handle = NetworkHandleFromPlayer(dude11, 13)
+		end
+	  end
 	 entityNetworkID = NetworkGetNetworkIdFromEntity(dude10)
      doesEntityExist = NetworkDoesNetworkIdExist(NetworkGetNetworkIdFromEntity(dude10))
       SetEntityAsMissionEntity(dude10, 1, 0)
+     if debugWindowBackground == nil or debugWindowBackground == "plain" then
      DrawSprite(debugWindowTextureDict,debugWindowTexture, debugWindowXPos, debugWindowYPos, debugWindowSizeX, debugWindowSizeY, debugWindowHeading, debugWindowColorR, debugWindowColorG, debugWindowColorB, debugWindowTranparency)
+	 elseif debugWindowBackground == "lightning" then
+	  runLightningAnimation()
+	 elseif debugWindowBackground == "flag" then
+	  runFlagAnimation() 
+	  --DrawSprite(debugWindowTextureDict,debugWindowTexture, debugWindowXPos, debugWindowYPos, debugWindowSizeX, debugWindowSizeY, debugWindowHeading, 255, 255, 255, 200)
+	  
+	 end
 	 DrawSprite("fiveM_headerss", "header-295-2", debugWindowXPos, debugWindowYPos - 0.325, 0.131, 0.043, 0.0, 255, 255, 255, 255)
      drawTxt('dave\'s ', 6, 1, debugWindowXPos - 0.030, debugWindowYPos - 0.343 , 0.5, 0, 255, 0, 255)
 	 drawTxt('DEBUG INFO ', 6, 1, debugWindowXPos + 0.023, debugWindowYPos - 0.343 , 0.5, 255, 0, 0, 255)
@@ -1889,36 +2017,75 @@ Citizen.CreateThread(function()
      drawTxt('Player Z position: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.23, 0.6, 255, 255, 255, 255)
      drawTxt(tostring(playerCoords.z) , 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.23, 0.6, 0, 255, 0, 255)
      drawTxt('Player Heading: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.26, 0.6, 255, 255, 255, 255)
-     drawTxt(tostring(GetEntityHeading(GetPlayerPed())), 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.26, 0.6, 0, 255, 0, 255)
-	 drawTxt('please note the rotation \"order\" is always 2 ', 6, 1, debugWindowXPos, debugWindowYPos + 0.29, 0.6, 255, 0, 0, 150)
+     drawTxt(tostring(playerHeading), 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.26, 0.6, 0, 255, 0, 255)
+	 drawTxt('Player UUID: ', 6, 1, debugWindowXPos - 0.05, debugWindowYPos + 0.29, 0.6, 255, 255, 255, 255)
+     drawTxt(tostring(handle), 6, 1, debugWindowXPos + 0.05, debugWindowYPos + 0.29, 0.6, 0, 255, 0, 255)
+	 drawTxt('please note the rotation \"order\" is always 2 ', 6, 1, debugWindowXPos, debugWindowYPos + 0.32, 0.6, 255, 0, 0, 150)
 	 
 	end	
 	if debugWindowConfigMenu == true then
 --------------------------------------------------------------------------------------------------------------
-local mouseX = GetControlNormal(2, 239)
-local mouseY = GetControlNormal(2, 240)
+ mouseX = GetControlNormal(2, 239)
+ mouseY = GetControlNormal(2, 240)
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------config button "move window"---------------------------------------------
 --------------------------------------------------------------------------------------------------------------
-local moveWindowButtotLeftEdge = (debugWindowXPos + debugWindowSizeX / 3) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
-local moveWindowButtotRightEdge = (debugWindowXPos + debugWindowSizeX / 3) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
-local moveWindowButtotTopEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
-local moveWindowButtotBottonEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2
+ moveWindowButtotLeftEdge = (debugWindowXPos + debugWindowSizeX / 3) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+ moveWindowButtotRightEdge = (debugWindowXPos + debugWindowSizeX / 3) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+ moveWindowButtotTopEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
+ moveWindowButtotBottonEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------config button "change color"---------------------------------------------
 --------------------------------------------------------------------------------------------------------------
-local buttonX3 = (debugWindowXPos) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
-local buttonX4 = (debugWindowXPos) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
-local buttonY3 = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
-local buttonY4 = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2
+ changeWindowColorButtotLeftEdge = (debugWindowXPos) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+ changeWindowColorButtotRightEdge = (debugWindowXPos) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+ changeWindowColorButtonTopEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
+ changeWindowColorButtonBottomEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2
+--------------------------------------------------------------------------------------------------------------
+-----------------------------------config button "change background"------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+ changeWindowBackgroundButtotLeftEdge = (debugWindowXPos - debugWindowSizeX / 3) - (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+ changeWindowBackgroundButtotRightEdge = (debugWindowXPos - debugWindowSizeX / 3) + (debugWindowSizeX - debugWindowSizeX + 0.08) / 2
+ changeWindowBackgroundButtonTopEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) - (debugWindowSizeY - 0.58) / 2
+ changeWindowBackgroundButtonBottomEdge = (debugWindowYPos + debugWindowSizeY / 2 + 0.05) + (debugWindowSizeY - 0.58) / 2 
+--------------------------------------------------------------------------------------------------------------
+------------------------------------------background button 1-------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+if debugWindowXPos > 0.5 then
+ changeBackgroundButton_1_ButtotLeftEdge = ((((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) - 0.16 / 2 / 2) - ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_1_ButtotRightEdge = ((((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) - 0.16 / 2 / 2) + ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_1_ButtonTopEdge = ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) - ((debugWindowSizeY - 0.58) - 0.003) / 2
+ changeBackgroundButton_1_ButtonBottomEdge = ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) + ((debugWindowSizeY - 0.58) - 0.003) / 2
+ 
+ changeBackgroundButton_2_ButtotLeftEdge = ((((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) + 0.16 / 2 / 2) - ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_2_ButtotRightEdge = ((((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) + 0.16 / 2 / 2) + ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_2_ButtonTopEdge = (((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) ) - ((debugWindowSizeY - 0.58) - 0.003) / 2
+ changeBackgroundButton_2_ButtonBottomEdge = (((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) ) + ((debugWindowSizeY - 0.58) - 0.003) / 2
+else
+ changeBackgroundButton_1_ButtotLeftEdge = ((((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) - 0.16 / 2 / 2) - ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_1_ButtotRightEdge = ((((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) - 0.16 / 2 / 2) + ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_1_ButtonTopEdge = ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) - ((debugWindowSizeY - 0.58) - 0.003) / 2
+ changeBackgroundButton_1_ButtonBottomEdge = ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) + ((debugWindowSizeY - 0.58) - 0.003) / 2
+ 
+ changeBackgroundButton_2_ButtotLeftEdge = ((((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) + 0.16 / 2 / 2) - ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_2_ButtotRightEdge = ((((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) + 0.16 / 2 / 2) + ((debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003) / 2
+ changeBackgroundButton_2_ButtonTopEdge = (((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) ) - ((debugWindowSizeY - 0.58) - 0.003) / 2
+ changeBackgroundButton_2_ButtonBottomEdge = (((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) ) + ((debugWindowSizeY - 0.58) - 0.003) / 2
+end
 SetCurrentPedWeapon(PlayerPedId(-1), GetHashKey("weapon_unarmed"))
+--debug config window
 	 DrawSprite("fiveM_headerss", "header-295-2", debugWindowXPos , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), debugWindowSizeX, debugWindowSizeY - 0.55, 0.0, 255, 255, 255, 255)
-	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos - debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 255, 255, 255, 255)
+--change background button
+	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos - debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 0, 200)
+--change color button
 	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 0, 200)
+--move window button
 	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), (debugWindowSizeY - 0.58), 0.0, 0, 0, 0, 200)
-	  drawTxt('move \n window', 6, 1, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 ), 0.6, 255, 255, 255, 255)
+	  drawTxt('move \n window', 6, 1, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 ) - 0.001, 0.6, 255, 255, 255, 255)
+	  drawTxt('change \n window \n color', 6, 1, (debugWindowXPos) , (debugWindowYPos + debugWindowSizeY / 2 ), 0.6, 255, 255, 255, 255)
+	  drawTxt('change \n window \n background', 6, 1, (debugWindowXPos - debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 ), 0.6, 255, 255, 255, 255)
 	  ShowCursorThisFrame()
-	  
+--move window button	  
 	  if (mouseX > moveWindowButtotLeftEdge and mouseX < moveWindowButtotRightEdge) and (mouseY >= moveWindowButtotTopEdge and mouseY <= moveWindowButtotBottonEdge) then
 	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos + debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
 	    moveWindow = true
@@ -1928,8 +2095,8 @@ SetCurrentPedWeapon(PlayerPedId(-1), GetHashKey("weapon_unarmed"))
 	   else
         moveWindow = false	   
 	   end
-	   
-	  if (mouseX > buttonX3 and mouseX < buttonX4) and (mouseY >= buttonY3 and mouseY <= buttonY4) then
+--change color button	   
+	  if (mouseX > changeWindowColorButtotLeftEdge and mouseX < changeWindowColorButtotRightEdge) and (mouseY >= changeWindowColorButtonTopEdge and mouseY <= changeWindowColorButtonBottomEdge) then
 	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
 	    windowColor = true
 	    if IsControlJustPressed(2, 237) and windowColor == true then
@@ -1943,7 +2110,168 @@ SetCurrentPedWeapon(PlayerPedId(-1), GetHashKey("weapon_unarmed"))
 	  rgbControl()
        DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255) 	  
 	 end
+--change background button	   
+	  if (mouseX > changeWindowBackgroundButtotLeftEdge and mouseX < changeWindowBackgroundButtotRightEdge) and (mouseY >= changeWindowBackgroundButtonTopEdge and mouseY <= changeWindowBackgroundButtonBottomEdge) then
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos - debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
+	    windowBackground = true
+	    if IsControlJustPressed(2, 237) and windowBackground == true then
+         changeBackground = not changeBackground
+		end   
+	   else
+        windowBackground = false
+	   end
+  
+     if changeBackground == true then
+--button hightlight
+	 DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos - debugWindowSizeX / 3) , (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.58, 0.0, 0, 0, 255, 255)
+	  if debugWindowXPos > 0.5 then
+--tiny texture 1
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, ((debugWindowXPos) - (debugWindowSizeX) / 2) -  (debugWindowSizeX - debugWindowSizeX + 0.08) / 2, (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.68, 0.0, 0, 0, 0, 200) 
+--tiny texture 2
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, ((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.070, (debugWindowYPos + debugWindowSizeY / 2 ) + 0.005, debugWindowSizeY - 0.68, debugWindowSizeY - 0.63, 0.0, 0, 0, 0, 200)
+--big texture 
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, ((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08 ,  debugWindowYPos, 0.16, (debugWindowSizeY - 0.06), 0.0, 0, 0, 0, 200)
+	   DrawSprite("fiveM_BasicTextures", "LegendaryMotoBoundingBox", ((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08 ,  debugWindowYPos, 0.16, debugWindowSizeY - 0.06, 0.0, 255, 255, 255, 255)
+--background button 1
+       DrawSprite("fiveM_animatedTextures", "flag0", (((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) - 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 255, 255, 255, 225)
+	   drawTxt('animated \n background', 6, 1, (((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) - 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) - 0.04, 0.6, 255, 255, 255, 255)
+	  if (mouseX > changeBackgroundButton_1_ButtotLeftEdge and mouseX < changeBackgroundButton_1_ButtotRightEdge) and (mouseY >= changeBackgroundButton_1_ButtonTopEdge and mouseY <= changeBackgroundButton_1_ButtonBottomEdge) then
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) - 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 0, 0, 255, 120)
+	   if saveOldColors == false then
+	   saveOldColors = true
+	   old_rgbSlider_R = rgbSlider_R
+	   old_rgbSlider_G = rgbSlider_G
+	   old_rgbSlider_B = rgbSlider_B
+	   end
+	   if loadOldColors == false then
+	   loadOldColors = true
+	   rgbSlider_R = old_rgbSlider_R
+	   rgbSlider_G = old_rgbSlider_G
+	   rgbSlider_B = old_rgbSlider_B 
+	   end
+	   rgbSlider_R = 0
+       rgbSlider_G = 0
+       rgbSlider_B = 0
+	   runFlagAnimation()
+	    windowBackground = true
+	    if IsControlJustPressed(2, 237) and windowBackground == true then
+         changeBackground = not changeBackground
+		saveOldColors = false
+		debugWindowBackground = "flag"
+		end   
+	   else
+        windowBackground = false
+		 loadOldColors = false
+	   end
+--background button 2
+	   DrawSprite("fiveM_animatedTextures", "frame_0_", (((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) + 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 255, 255, 255, 225)
+	   drawTxt('animated \n background', 6, 1, (((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) + 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) - 0.04, 0.6, 255, 255, 255, 255)
+	  if (mouseX > changeBackgroundButton_2_ButtotLeftEdge and mouseX < changeBackgroundButton_2_ButtotRightEdge) and (mouseY >= changeBackgroundButton_2_ButtonTopEdge and mouseY <= changeBackgroundButton_2_ButtonBottomEdge) then
+	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (((debugWindowXPos) - (debugWindowSizeX) / 2) - 0.08) + 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 0, 0, 255, 120)
+	    windowBackground = true
+	    if IsControlJustPressed(2, 237) and windowBackground == true then
+         changeBackground = not changeBackground
+		 saveOldColors = false
+		 debugWindowBackground = "lightning"
+		end
+	   if saveOldColors == false then
+	   saveOldColors = true
+	   old_rgbSlider_R = rgbSlider_R
+	   old_rgbSlider_G = rgbSlider_G
+	   old_rgbSlider_B = rgbSlider_B
+	   end
+	   if loadOldColors == false then
+	   loadOldColors = true
+	   rgbSlider_R = old_rgbSlider_R
+	   rgbSlider_G = old_rgbSlider_G
+	   rgbSlider_B = old_rgbSlider_B 
+	   end
+	   rgbSlider_R = 0
+       rgbSlider_G = 0
+       rgbSlider_B = 0
+	   runLightningAnimation()
+	    windowBackground = true  
+	   else
+        windowBackground = false
+		loadOldColors = false
+	   end
+	   
 
+
+	 else 
+--tiny texture 1
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, ((debugWindowXPos) + (debugWindowSizeX) / 2) +  (debugWindowSizeX - debugWindowSizeX + 0.08) / 2, (debugWindowYPos + debugWindowSizeY / 2 + 0.05), (debugWindowSizeX - debugWindowSizeX + 0.08), debugWindowSizeY - 0.68, 0.0, 0, 0, 0, 200) 
+--tiny texture 2
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, ((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.070, (debugWindowYPos + debugWindowSizeY / 2 ) + 0.005, debugWindowSizeY - 0.68, debugWindowSizeY - 0.63, 0.0, 0, 0, 0, 200)
+--big texture 
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, ((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08 ,  debugWindowYPos, 0.16, (debugWindowSizeY - 0.06), 0.0, 0, 0, 0, 200)
+	   DrawSprite("fiveM_BasicTextures", "LegendaryMotoBoundingBox", ((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08 ,  debugWindowYPos, 0.16, debugWindowSizeY - 0.06, 0.0, 255, 255, 255, 255)
+--background button 1
+       DrawSprite("fiveM_animatedTextures", "flag0", (((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) - 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 255, 255, 255, 225)
+	   drawTxt('animated \n background', 6, 1, (((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) - 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) - 0.04, 0.6, 255, 255, 255, 255)
+	  if (mouseX > changeBackgroundButton_1_ButtotLeftEdge and mouseX < changeBackgroundButton_1_ButtotRightEdge) and (mouseY >= changeBackgroundButton_1_ButtonTopEdge and mouseY <= changeBackgroundButton_1_ButtonBottomEdge) then
+	   DrawSprite(debugWindowTextureDict, debugWindowTexture, (((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) - 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 0, 0, 255, 120)	   
+	    windowBackground = true
+	    if IsControlJustPressed(2, 237) and windowBackground == true then
+         changeBackground = not changeBackground
+		 debugWindowBackground = "flag"
+		 saveOldColors = false
+		end
+	   if saveOldColors == false then
+	   saveOldColors = true
+	   old_rgbSlider_R = rgbSlider_R
+	   old_rgbSlider_G = rgbSlider_G
+	   old_rgbSlider_B = rgbSlider_B
+	   end
+	   if loadOldColors == false then
+	   loadOldColors = true
+	   rgbSlider_R = old_rgbSlider_R
+	   rgbSlider_G = old_rgbSlider_G
+	   rgbSlider_B = old_rgbSlider_B 
+	   end
+	   rgbSlider_R = 0
+       rgbSlider_G = 0
+       rgbSlider_B = 0
+	   runFlagAnimation()
+	    windowBackground = true  
+	   else
+        windowBackground = false
+	   end
+	   
+--background button 2
+	   DrawSprite("fiveM_animatedTextures", "frame_0_", (((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) + 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 255, 255, 255, 225)
+       drawTxt('animated \n background', 6, 1, (((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) + 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) - 0.04, 0.6, 255, 255, 255, 255)
+	  if (mouseX > changeBackgroundButton_2_ButtotLeftEdge and mouseX < changeBackgroundButton_2_ButtotRightEdge) and (mouseY >= changeBackgroundButton_2_ButtonTopEdge and mouseY <= changeBackgroundButton_2_ButtonBottomEdge) then
+	  DrawSprite(debugWindowTextureDict, debugWindowTexture, (((debugWindowXPos) + (debugWindowSizeX) / 2) + 0.08) + 0.16 / 2 / 2 ,  ((debugWindowYPos) - ((debugWindowSizeY - 0.06) /2) + ((debugWindowSizeY - 0.58) / 2)) , (debugWindowSizeX - debugWindowSizeX + 0.08) - 0.003, (debugWindowSizeY - 0.58) - 0.003, 0.0, 0, 0, 255, 120)
+	    windowBackground = true
+	    if IsControlJustPressed(2, 237) and windowBackground == true then
+         changeBackground = not changeBackground
+		 debugWindowBackground = "lightning"
+		 saveOldColors = false
+		end
+	   if saveOldColors == false then
+	   saveOldColors = true
+	   old_rgbSlider_R = rgbSlider_R
+	   old_rgbSlider_G = rgbSlider_G
+	   old_rgbSlider_B = rgbSlider_B
+	   end
+	   if loadOldColors == false then
+	   loadOldColors = true
+	   rgbSlider_R = old_rgbSlider_R
+	   rgbSlider_G = old_rgbSlider_G
+	   rgbSlider_B = old_rgbSlider_B 
+	   end
+	   rgbSlider_R = 0
+       rgbSlider_G = 0
+       rgbSlider_B = 0
+	   runLightningAnimation()
+	    windowBackground = true 
+	   else
+        windowBackground = false
+	   end
+	   
+	 end  
+	 end
 
      if moveWindowSprite == true then
 		 DrawSprite(debugWindowTextureDict, debugWindowTexture, (debugWindowXPos) , (debugWindowYPos), 0.05, 0.05, 0.0, 255, 255, 255, 150)
@@ -1961,13 +2289,15 @@ SetCurrentPedWeapon(PlayerPedId(-1), GetHashKey("weapon_unarmed"))
 		  end
 		end
 
-
+     if debugWindowBackground == "lightning" then
+	  lightning = true
+	 end
 	 end
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------this checks if the spawned entity exists and moves it as player pushes buttons---------------------------------------
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 	if not DoesEntityExist(a) or DoesEntityExist(GetClosestObjectOfType(playerCoordsX, playerCoordsY, playerCoordsZ, 50.0, stuff, 0, 1, 0))  then
-	 a = GetClosestObjectOfType(playerCoordsX, playerCoordsY, playerCoordsZ, 50.0, stuff, 0, 1, 0)
+	 a = GetClosestObjectOfType(playerCoordsX, playerCoordsY, playerCoordsZ, 50.0, stuff, 1, 1, 1)
     end
     if DoesEntityExist(a) then
      b = ObjToNet(a)	 
@@ -2176,7 +2506,7 @@ function deleteStuff()
  --this delete's the entity that was spawned or 
  --any close by entity with the the same hash key 
  if DoesEntityExist(closestEntity) and not DoesEntityExist(a) then
- --closestEntity = NetworkGetNetworkIdFromEntity(closestEntity)    
+ closestEntity = NetworkGetNetworkIdFromEntity(closestEntity)    
  SetEntityAsMissionEntity(closestEntity,true,true) 
  DeleteObject(closestEntity)
  end
@@ -2218,7 +2548,7 @@ function setCollisionStuff(bool)
     SetEntityCollision(a, false, false)
   end 
 end
-
+stuffBool = false
 ----------------------------
 --this is the ACTUAL spawner
 function spawnStuff(stuff)
@@ -2226,7 +2556,9 @@ Citizen.CreateThread(function()
 --this requests the model of what is to be spawned
    if DoesEntityExist(dude10) then
     dude10Model = GetEntityModel(dude10)
+	if  showInfo == true then
 	 stuff = dude10Model
+	end
    end
 	if not HasModelLoaded(stuff) then
 	 Citizen.Wait(0)
@@ -2295,7 +2627,7 @@ Citizen.CreateThread(function()
 	setCollisionStuff(true)
     freezeStuff()
 	SetEntityHeading(a, playerHeading)
-   end	
+end		
 end)
 end
 
